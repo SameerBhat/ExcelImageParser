@@ -39,7 +39,6 @@ app.get('/delete', (req, res) => {
       });
 
 
-    res.send("Working");
 });
 
 app.post('/convert', (req, res) => {
