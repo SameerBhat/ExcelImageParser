@@ -61,7 +61,7 @@ app.post('/convert', (req, res) => {
 
             if(file.includes(".jpg") || file.includes(".png")){
                 console.log(file);
-                images.push('http://127.0.0.1:1234/'+file);
+                images.push('http://74.63.223.70:1234/'+file);
             }
           
         });
