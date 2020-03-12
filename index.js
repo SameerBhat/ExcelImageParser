@@ -41,11 +41,11 @@ app.post('/convert', (req, res) => {
         return;
     }
 
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        res.send({status: 'error', message: stderr});
-        return;
-    }
+    // if (stderr) {
+    //     console.log(`stderr: ${stderr}`);
+    //     res.send({status: 'error', message: stderr});
+    //     return;
+    // }
 
 
     var images = [];
