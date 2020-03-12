@@ -2,7 +2,7 @@
 const express = require('express');
 const fs = require('fs')
 var fileupload = require("express-fileupload");
-
+const path = require('path');
 const { exec } = require("child_process");
 const app = express();
 const port = 1234;
@@ -13,6 +13,32 @@ app.use(express.static(converted_dir));
 app.use(fileupload());
 
 app.get('/test', (req, res) => {
+    res.send("Working");
+});
+
+
+app.get('/delete', (req, res) => {
+
+    fs.readdir(converted_dir, (err, files) => {
+        if (err) {
+            console.log(err);
+            res.send({status: 'error', message: err});
+        } 
+      
+        for (const file of files) {
+          fs.unlink(path.join(converted_dir, file), err => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', message: err});
+            } 
+
+            res.send({status: 'success', message: "deleted all files"});
+
+          });
+        }
+      });
+
+
     res.send("Working");
 });
 
@@ -58,7 +84,6 @@ app.post('/convert', (req, res) => {
         }
 
         files.forEach(file => {
-
             if(file.includes(".jpg") || file.includes(".png")){
                 console.log(file);
                 images.push('http://74.63.223.70:1234/'+file);
