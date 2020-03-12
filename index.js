@@ -17,21 +17,14 @@ app.get('/test', (req, res) => {
 });
 
 app.post('/convert', (req, res) => {
-
-  
-
     var file;
-
     if(!req.files)
     {
         res.send("File was not found");
         return;
     }
-
     file = req.files.file;  // here is the field name of the form
-
     var fileLocation = converted_dir+'/'+file.name;
-
     file.mv( fileLocation, function(err) {
         if (err) {
 
@@ -39,9 +32,7 @@ app.post('/convert', (req, res) => {
 
             console.log(err);
         }
-
         // console.log(file);
-
      exec(`soffice --headless --convert-to html  ${fileLocation} --outdir ${converted_dir}`, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -49,10 +40,10 @@ app.post('/convert', (req, res) => {
 
         return;
     }
+
     if (stderr) {
         console.log(`stderr: ${stderr}`);
         res.send({status: 'error', message: stderr});
-
         return;
     }
 
@@ -62,9 +53,7 @@ app.post('/convert', (req, res) => {
 
         if (err) {
             console.log(`err: ${err}`);
-
             res.send({status: 'error', message: err});
-    
             return;
         }
 
