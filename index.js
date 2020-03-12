@@ -12,6 +12,10 @@ const converted_dir = 'images';
 app.use(express.static(converted_dir));
 app.use(fileupload());
 
+app.get('/test', (req, res) => {
+    res.send("Working");
+});
+
 app.post('/convert', (req, res) => {
 
   
