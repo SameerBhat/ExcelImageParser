@@ -3,8 +3,11 @@ const express = require('express');
 const fs = require('fs')
 var fileupload = require("express-fileupload");
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 const { exec } = require("child_process");
 const app = express();
+const host = process.env.HOST
 const port = 1234;
 
 
@@ -85,7 +88,7 @@ app.post('/convert', (req, res) => {
         files.forEach(file => {
             if(file.includes(".jpg") || file.includes(".png")){
                 console.log(file);
-                images.push('http://74.63.223.70:1234/'+file);
+                images.push(`http://${host}:${port}/`+file);
             }
           
         });
