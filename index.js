@@ -26,19 +26,34 @@ app.get('/delete', (req, res) => {
         if (err) {
             console.log(err);
             res.send({status: 'error', message: err});
+            return;
         } 
       
+       
+        if(files.length == 0){
+            // console.log("empty dir")
+            res.send({status: 'success', message: "Empty dir"});
+            return;
+        }
+
+       
         for (const file of files) {
+
           fs.unlink(path.join(converted_dir, file), err => {
             if (err) {
                 console.log(err);
                 res.send({status: 'error', message: err});
+                return;
             } 
-
-            res.send({status: 'success', message: "deleted all files"});
-
           });
+
+         
         }
+
+        
+        res.send({status: 'success', message: "deleted all files"});
+        return;
+
       });
 
 
